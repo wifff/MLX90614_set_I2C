@@ -42,7 +42,7 @@ void setup ()
 byte crc;
 int status;
 
-  Serial.begin (115200);
+  Serial.begin (9600);
   while (!Serial);
   Serial.println ("Starting...");
   Wire.begin ();
@@ -60,7 +60,9 @@ int status;
   Wire.send (crc);                  // PEC (packet error code)
   status = Wire.endTransmission();
   delay (5);  // give it time to write
-  
+
+  Serial.print ("New I2C address: ");
+  Serial.println (NEW_ADDRESS, HEX);
   Serial.print ("Status from erase was: ");
   Serial.println (status, DEC);
 
@@ -85,12 +87,14 @@ int status;
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.print ("+++ finished +++");
+  Serial.println ("+++ finished +++");
+  Serial.println ("==================================================================");  
   delay (3000);
   while (true){
-    Serial.print ("if status from erase and change was '0' the new I2C adress is set");
-    Serial.print ("switch OFF and ON the MLX90614 device to make the change active");
-    delay (5000);
+    Serial.println ("if status from erase and change was '0' the new I2C adress is set");
+    Serial.println ("switch OFF and ON the MLX90614 device to make the change active");
+    Serial.println ("==================================================================");
+    delay (10000);
   }
 
 }
